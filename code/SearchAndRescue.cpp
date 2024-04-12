@@ -151,14 +151,60 @@ bool SearchAndRescue::iterativeDeepeningWrapper(State* start)
 
 bool SearchAndRescue::iterativeDeepeningSearch(State* current, int depth_limit)
 {
-    if(depth_limit == 0) {return false;}
 
-    
+    State* next;
 
+    vector<string> possible_actions;
+
+    possibleActions(current);
+
+
+    for (string action : possible_actions)
+    {
+
+        next = result(current, action);
+
+        bool found = iterativeDeepeningSearch(next, depth_limit - 1);
+
+        if (found)
+        {
+            return true;
+        }
+
+    }
 
     return false;
 }
 
+/*
+vector<string> possible_actions;
+
+    possibleActions(*current, possible_actions, rows, cols);
+
+ 
+
+    for (string action : possible_actions)
+
+    
+
+        State* next = result(current, action);
+
+        bool found = iterativeDeepeningSearch(next, depth - 1);
+
+        if (found)
+
+        {
+
+            return true;
+
+        }
+
+    }
+
+ 
+
+    return false;
+*/
 
 void SearchAndRescue::printPath()
 {
